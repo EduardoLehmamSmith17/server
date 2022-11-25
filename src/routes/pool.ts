@@ -5,8 +5,7 @@ import ShortUniqueId from 'short-unique-id';
 import { authenticate } from "../plugins/authenticate";
 
 export async function poolRouters(fastify: FastifyInstance) {
-  fastify.get(
-    '/pools/count', async () => {
+  fastify.get('/pools/count', async () => {
       const count = await prisma.pool.count()
 
       return { count }
@@ -47,9 +46,7 @@ export async function poolRouters(fastify: FastifyInstance) {
     return reply.status(201).send({code})
   })
 
-  fastify.post('/pools/join', {
-    onRequest: [authenticate]
-  }, async (request, reply) => {
+  fastify.post('/pools/join', { onRequest: [authenticate] }, async (request, reply) => {
     const joinPoolBody = z.object({
       code:z.string(),
     })
@@ -75,7 +72,7 @@ export async function poolRouters(fastify: FastifyInstance) {
       })
     }
     
-    if(pool.participants.length> 0) {
+    if(pool.participants.length > 0) {
       return reply.status(400).send ({
         message: 'You already joined this poll.'
       })
