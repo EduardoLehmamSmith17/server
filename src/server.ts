@@ -20,7 +20,7 @@ const start = async () => {
         })
     
         await fastify.register(jwt, {
-            secret: "nlwcopa",
+            secret: "supersecret",
         })
     
         await fastify.register(poolRouters)
